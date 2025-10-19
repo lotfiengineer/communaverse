@@ -19,7 +19,7 @@ const createCommunity = async (req, res) => {
 
     const newCommunity = new Community({
       name,
-      authorId: req.userId,
+      author: req.userId,
       members: [],
       createdAt: new Date(),
     });
