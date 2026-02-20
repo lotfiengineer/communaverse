@@ -11,7 +11,7 @@ export const useCreateCommunity = () => {
 
   return useMutation({
     mutationFn: ({ community }: { community: CommunitySchemaType }) =>
-      axiosInstance.post<Community>("/communities", community),
+      axiosInstance.post<Community>("/api/communities", community),
     onSettled: (data) => {
       if (data) {
         router.push(`community/${data.data._id}/members`);
@@ -31,7 +31,7 @@ export const useEditCommunity = () => {
       communityId: string;
       community: CommunitySchemaType;
     }) =>
-      axiosInstance.put<Community>(`/communities/${communityId}`, community),
+      axiosInstance.put<Community>(`/api/communities/${communityId}`, community),
     onSettled: (data) => {
       if (data) {
         router.push("/");
@@ -45,7 +45,7 @@ export const useDeleteCommunity = () => {
 
   return useMutation({
     mutationFn: (communityId: string) =>
-      axiosInstance.delete<Community>(`/communities/${communityId}`),
+      axiosInstance.delete<Community>(`/api/communities/${communityId}`),
     onSettled: (data) => {
       if (data) {
         router.push("/");

@@ -5,7 +5,9 @@ import getQueryClient from "../react-query/getQueryClient";
 import { EventSchemaType } from "../schemas/event.schema";
 
 const getAllEvents = async (communityId: string) => {
-  const response = await axiosInstance.get<Event[]>(`/events/${communityId}`);
+  const response = await axiosInstance.get<Event[]>(
+    `/api/events/${communityId}`,
+  );
   return response.data;
 };
 
@@ -17,7 +19,7 @@ export const useAllEvents = ({ communityId }: { communityId: string }) => {
 };
 
 const deleteEvent = async (eventId: string) => {
-  const response = await axiosInstance.delete(`/events/${eventId}`);
+  const response = await axiosInstance.delete(`/api/events/${eventId}`);
   return response.data;
 };
 
@@ -38,11 +40,11 @@ export const useCreateEvent = ({ communityId }: { communityId: string }) => {
   const queryClient = getQueryClient();
 
   return useMutation({
-    mutationFn: (data: EventSchemaType) =>  axiosInstance.post(`/events`, data),
+    mutationFn: (data: EventSchemaType) => axiosInstance.post(`/api/events`, data),
     onSettled: () => {
-            queryClient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: ["events", communityId],
       });
-    }
+    },
   });
 };

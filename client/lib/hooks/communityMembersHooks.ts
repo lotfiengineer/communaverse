@@ -7,12 +7,12 @@ import { queryKeys } from "@/lib/react-query/queryKeys";
 import { Community } from "@/lib/types/community";
 
 const apis = {
-  communities: "/communities",
+  communities: "/api/communities",
   communityMembers: (communityId: string) =>
-    `/communities/${communityId}/members`,
+    `/api/communities/${communityId}/members`,
   // Todo: fix this later
   communityMembersIddsssss: (communityId: string, memberId: string) =>
-    `/communities/${communityId}/members/${memberId}`,
+    `/api/communities/${communityId}/members/${memberId}`,
 };
 
 export const getAllCommunities = async () => {
@@ -83,7 +83,7 @@ export const useCommunityMembers = (communityId: string) => {
 
 export const getCommunityById = async (communityId: string) => {
   const response = await axiosInstance.get<Community>(
-    `/communities/${communityId}`
+    `/api/communities/${communityId}`
   );
   return response.data;
 };
